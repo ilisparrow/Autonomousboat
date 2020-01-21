@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+
+<launch>
+
+
+
+ <node pkg="auto_bateau" type="mavros" respawn="false" name="mavros" launch-prefix="xterm -e" output="screen"/>
+
+ <node pkg="auto_bateau" type="lidar" respawn="false" name="lidar" launch-prefix="xterm -e" output="screen"/>
+ 
+ <node pkg="auto_bateau" type="main.py" respawn="false" name="main_fonction" launch-prefix="xterm -e" output="screen"/>
+ 
+ <node pkg="auto_bateau" type="ObstacleDetect.py" respawn="false" name="ObstacleDetect" launch-prefix="xterm -e" output="screen"/>
+  
+</launch>
+
+
+#To run this launchfiles, use the commande line: roslaunch package-name launch-file-name
+# => roslaunch auto_bateau autobateau.launch
