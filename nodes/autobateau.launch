@@ -17,3 +17,4 @@
 
 
 #To run this launchfiles, use the commande line: roslaunch package-name launch-file-name
+# => roslaunch auto_bateau autobateau.launch
