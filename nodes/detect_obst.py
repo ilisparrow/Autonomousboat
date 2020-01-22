@@ -26,13 +26,17 @@ class ObstacleDetect():
                 rospy.loginfo('ObstacleDetect boucle :')
                 self.dist_min = min(self.scan.ranges[180:360])
                 if dist_min < 1.5:
-                    #distance :
                     self.msg.x = self.dist_min
-                    #angle :
                     self.msg.y = self.RAD2DEG(self.scan.angle_min + self.scan.ranges.index(min(self.dist_min))*self.scan.angle_increment)
-                    self.msg.z = 0
+                    self.msg.z = 1
                     self.pub.publish(self.msg)
                     loginfo("L'obstacle est a {1}m et {2}deg".format(self.msg.x, self.msg.y))
+                else:
+                    self.msg.x = 0
+                    self.msg.y = 0
+                    self.msg.z = 0
+                    self.pub.publish(self.msg)
+                    loginfo("Pas d'obstacle")
 
 test = ObstacleDetect()
 test.run()
