@@ -4,16 +4,15 @@
 <launch>
 
 	
-	<node pkg="auto_bateau" type="mavros" respawn="false" name="Mavros" launch-prefix="xterm -e" output="screen"/>
 	<include file="amp.launch" />
 	<include file="rplidar.launch" />
 	
 	
 	<group ns="EviderObstacle">
-        	<node pkg="src" type="detect_obst.py" respawn="false" name="ObstacleDetect" launch-prefix="xterm -e" output="screen">	
+        	<node pkg="main" type="detect_obst.py" respawn="false" name="ObstacleDetect" launch-prefix="xterm -e" output="screen">	
 		</node>
         
-       		<node pkg="src" type="avoid_obst.py" respawn="false" name="EviderObstacle" launch-prefix="xterm -e" output="screen">
+       		<node pkg="main" type="avoid_obst.py" respawn="false" name="EviderObstacle" launch-prefix="xterm -e" output="screen">
        		</node>
         
     	</group>
