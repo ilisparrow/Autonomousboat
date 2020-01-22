@@ -19,7 +19,7 @@
 
 
  
-    	<node pkg="src" type="main.py" respawn="false" name="main_fonction" launch-prefix="xterm -e" output="screen"/>
+    	<node pkg="main" type="main.py" respawn="false" name="main_fonction" launch-prefix="xterm -e" output="screen"/>
  
    
 </launch>
