@@ -8,8 +8,8 @@ class ObstacleDetect():
 
     def __init__(self):
         self.sub = rospy.Subscriber("/scan",LaserScan, self.callback)
-        #self.pub = rospy.Publisher("/ObstacleAvoid", Point, queue_size=10)
-        rospy.init_node('ObstacleDetect', anonymous=True)
+        self.pub = rospy.Publisher("/pos_obst", Point, queue_size=10)
+        rospy.init_node('detect_obst', anonymous=True)
         self.rate = rospy.Rate(2)
         self.msg = Point()
         self.scan = LaserScan()
@@ -17,23 +17,22 @@ class ObstacleDetect():
     def callback(self, data):
         self.scan = data
 
-    def RAD2DEG(x):
+    def RAD2DEG(self, x):
         return (x*180.)/np.pi
 
     def run(self):
         while not rospy.is_shutdown():
             if not (len(self.scan.ranges)==0):
                 rospy.loginfo('ObstacleDetect boucle :')
-                dist_min = min(self.scan.ranges)
-                print("angle_min {1}, angle_max {2}, angle_increment {3}, scan len {4}".format(self.scan.angle_min, self.scan.angle_max, self.scan.angle_increment, len(self.scan.ranges)))
-                if dist_min < 2.5:
+                self.dist_min = min(self.scan.ranges[180:360])
+                if dist_min < 1.5:
                     #distance :
-                    self.msg.x = min(scan.ranges)
+                    self.msg.x = self.dist_min
                     #angle :
-                    self.msg.y = RAD2DEG(self.scan.angle_min + scan.ranges.index(min(scan.ranges[]))*self.scan.angle_increment)
+                    self.msg.y = self.RAD2DEG(self.scan.angle_min + self.scan.ranges.index(min(self.dist_min))*self.scan.angle_increment)
                     self.msg.z = 0
-                    #self.pub.publish(self.msg)
-                    print("L'obstacle est a {1}m et {2}deg".format(self.msg.x, self.msg.y))
+                    self.pub.publish(self.msg)
+                    loginfo("L'obstacle est a {1}m et {2}deg".format(self.msg.x, self.msg.y))
 
 test = ObstacleDetect()
 test.run()
