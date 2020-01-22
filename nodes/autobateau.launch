@@ -42,7 +42,7 @@
  
     	<node pkg="auto_bateau" type="main.py" respawn="false" name="main_fonction" launch-prefix="xterm -e" output="screen"/>
  
-    	#<node pkg= "auto_bateau" type="vision.py" respawn="false" name="vision_result" launch-prefix="xterm -e" output="screen"/>
+    	<！--node pkg= "auto_bateau" type="vision.py" respawn="false" name="vision_result" launch-prefix="xterm -e" output="screen"/-->
  
    
 </launch>
