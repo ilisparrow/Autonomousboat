@@ -10,11 +10,9 @@ class ObstacleAvoid():
         self.sub = rospy.Subscriber("/pos_obst", Point, self.callback)
         self.pub = rospy.Publisher("/mavros/setpoint_velocity/cmd_vel", TwistStamped, queue_size=10)
         self.mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)
-        rospy.init_node('avoid_obst', anonymous=True)
+        rospy.init_node('test_vel', anonymous=True)
         self.rate = rospy.Rate(2)
         self.msg = TwistStamped()
-        self.scan = Point()
-        self.resultatMode = False
 
     def callback(self, data):
         self.scan = data
